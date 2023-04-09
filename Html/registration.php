@@ -98,7 +98,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <body>
 
-
+<div class="loader_bg">
+    <div class="loader"></div>
+</div>
     <script>
     window.setTimeout(function() {
         $(".alert").fadeTo(500, 0).slideUp(500, function() {
@@ -431,7 +433,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <h4 class="modal-title">PRIVACY POLICY</h4>
                 </div>
                 <div class="modal-body">
-                    <p>EFFECTIVE DATE: July 4, 2023</p>
+                    <p>EFFECTIVE DATE: April 8, 2023</p>
 
                     <p>1. <b>Overview</b></p>
 
@@ -776,22 +778,38 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     </script>
     <style>
-    .container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 125%;
-        display: flex;
 
-    }
+body{
+    height: 140vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg , #1d2951 , #1d2951);
+}
 
+.container{
+    height: 840px;
+    width: 900px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+}
+
+.left-div{
+    flex-basis: 10%;
+}
+
+.right-div{
+    flex-basis: 90%;
+}
     </style>
 
     <div class="container">
         <div class="left-div">
             <div class="left-image">
-                <img src="..\images\login.png" alt="">
+                <img src="..\images\login3.png" alt="">
             </div>
             <div class="left-text">
                 <p>Enter your personal details and start your journey with us!</p>
@@ -915,7 +933,12 @@ document.addEventListener("DOMContentLoaded", function() {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
         integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous">
     </script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        setTimeout(function(){
+            $('.loader_bg').fadeToggle();
+        }, 1500);
+    </script>
 </body>
 
 </html>

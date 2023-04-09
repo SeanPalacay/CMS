@@ -128,7 +128,9 @@ $(document).ready(function() {
 
 
 <body>
-
+<div class="loader_bg">
+    <div class="loader"></div>
+</div>
 
     <div class="container">
 
@@ -238,6 +240,12 @@ $(document).ready(function() {
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
         integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        setTimeout(function(){
+            $('.loader_bg').fadeToggle();
+        }, 1500);
     </script>
 </body>
 
