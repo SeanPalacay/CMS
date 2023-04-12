@@ -1,387 +1,113 @@
+ <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recover Password</title>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="..\Css\style.css">
+</head>
+
 <?php
+include_once('db.php');
+if(isset($_REQUEST['pwdrst']))
+{
 
-   require_once "db.php";
+    $email = $_REQUEST['email'];
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-   if(isset($_GET['email'])){
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    $email = mysqli_real_escape_string($conn, $_GET['email']);
+    $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
 
-    $query = "select * from tblregistration where email='$email'";
-
-    $run = mysqli_query($conn,$query);
-
-    if(mysqli_num_rows($run)>0){
-
-        $row=mysqli_fetch_array($run);
-
-        $id  =$row['id'];
-
-        $email = $row['email'];
-
-    }
-
-}
-
-    if (isset($_POST['submit'])) {
-
-        
-
-        
+    $hashed_cpassword = password_hash($cpassword, PASSWORD_DEFAULT);
 
     
 
-        $password = mysqli_real_escape_string($conn, $_POST['password']);
+    
 
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    
 
-        $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
+    if(strlen($password) < 6) {
 
-        $hashed_cpassword = password_hash($cpassword, PASSWORD_DEFAULT);
+        $password_error = '<div class="alert alert-danger">Password must be minimum of 6 characters.</div>';
+
+    }       
+
+    if($password != $cpassword) {
+
+        $confirmpassword_error = '<div class="alert alert-danger">Password and Confirm Password does not match</div>';
+
+    }
+
+   
+
+    else {
+
+   
+
+        $query1 ="update tblregistration set password='$hashed_password', cpassword = '$hashed_cpassword' where email='$email'";
+
+    $result= mysqli_query($conn, $query1);
+
+   
+
+    if($result){
+
+        $msg= '<div class="alert alert-success">Your password has been updated! <a href="login.php">Click here</a> to login </div>';
+
+      
+
 
         
-
-        
-
-        
-
-        if(strlen($password) < 6) {
-
-            $password_error = '<div class="alert alert-danger">Password must be minimum of 6 characters.</div>';
-
-        }       
-
-        if($password != $cpassword) {
-
-            $confirmpassword_error = '<div class="alert alert-danger">Password and Confirm Password does not match</div>';
-
-        }
-
-       
-
-        else {
-
-       
-
-            $query1 ="UPDATE tblregistration SET password = '".$hashed_password."', cpassword = '".$hashed_cpassword."' WHERE id = '$_POST[id]'";
-
-        $result= mysqli_query($conn, $query1);
-
-       
-
-        if($result){
-
-            $msg= '<div class="alert alert-success">Your password has been updated!</div>';
-
-          
-
-
-
-            
-
-        }
 
     }
 
 }
+}
 
-?>
-
-<script>
-
-window.setTimeout(function() {
-
-    $(".alert").fadeTo(500, 0).slideUp(500, function(){
-
-        $(this).remove(); 
-
-    });
-
-}, 4000);
-
-
-
-</script>
-
-
-
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <?php include 'db.php'; 
-
-
-
-$query="SELECT * from tblcontent";
-
-$result= mysqli_query($conn,$query);
-
-while($row = mysqli_fetch_assoc($result))
-
+if($_GET['secret'])
 {
+  $email = base64_decode($_GET['secret']);
+  $check_details = mysqli_query($conn,"select email from tblregistration where email='$email'");
+  $res = mysqli_num_rows($check_details);
+  if($res>0)
+    { ?>
+<body>
 
- $navtitle = $row['navtitle'];
+<div class="container">
 
-    $title = $row['title'];
+    <div class="left-div">
+        <div class="left-image">
+            <img src="..\images\Forgot Pass.png" alt="">
+        </div>
+        <div class="left-text">
+            <p>To reset your password, enter the registered e-mail adddress and we will send you password reset instructions on your e-mail!</p>
+        </div>
+    </div>
+  
+         <!-- right div start  -->
 
-   
-
-    }
-
-?>
-
-
-
-    <!doctype html>
-
-    <html lang="en">
-
-    <head>
-
+         <div class="right-div">
+            <h4>Reset Password</h4>
+     <form id="validate_form" method="post" class="right-form forgotPass-form">  
+      <ul>
+            <li><h3>Recover Your Password</h3></li>
+            <li><input type="hidden" name="email" value="<?php echo $email; ?>"/></li>
+          <li>  <input type="password" name="password" id="password" placeholder="Enter Password" required 
+       data-parsley-type="password" data-parsley-trigg
+       er="keyup" class="form-control"/></li>
+     <li> <input type="password" name="cpassword" id="cpassword" placeholder="Enter Confirm Password" required data-parsley-type="cpassword" data-parsley-trigg
+       er="keyup" class="form-control"/></li>
+  <li><input type="submit" id="login" name="pwdrst" value="Reset Password" class="btn btn-success" />  </li>
+  </ul>
        
-
-        <meta charset="utf-8">
-
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        <link rel="shortcut icon" href="icon.ico" />
-
-       
-
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-
-        <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-
-
-
-        <link rel="stylesheet" href="css/style.css">
-
-
-
-        <link rel="icon" href="Favicon.png">
-
-
-
-
-
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
-
-
-        <title><?php echo $title; ?></title>
-
-    </head>
-
-    <body>
-
-
-
-    <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
-
-        <div class="container">
-
-            <a class="navbar-brand" href="login.php"><?php echo $navtitle; ?></a>
-
-        </div>
-
-    </nav>
-
-   
-
-    <main class="login-form">
-
-        <div class="cotainer">
-
-            <div class="row justify-content-center">
-
-                <div class="col-md-8">
-
-                    <div class="card">
-
-                        
-
-                        <div class="card-header">Change Password</div>
-
-                        
-
-                        <div class="card-body">
-
-                             <?php if(isset($msg)){
-
-
-
-echo $msg;
-
-}
-
-
-
-?>
-
- <?php if(isset($password_error)){
-
-
-
-echo $password_error;
-
-}
-
-
-
-?>
-
- <?php if(isset($confirmpassword_error)){
-
-
-
-echo $confirmpassword_error;
-
-}
-
-
-
-?>
-
-                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" autocomplete="off">
-
-                        
-
-                            <input type="hidden" name="id" id="id" value="<?php echo $row ['id']; ?> ">
-
-
-
-                            <div class="form-group row">
-
-                                <label for="password" class="col-md-4 col-form-label text-md-right">New Password</label>
-
-                                <div class="col-md-6">
-
-                                    <input type="password" id="password" class="form-control" name="password" required>
-
-                                    <input type="checkbox" onclick="Toggle()"> Show Password
-
-                                    <br>
-
-                                     
-
-                                </div>
-
-                            </div>
-
-
-
-                                 <div class="form-group row">
-
-                                <label for="cpassword" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
-
-                                <div class="col-md-6">
-
-                                    <input type="password" id="cpassword" class="form-control" name="cpassword"  required>
-
-                                    <input type="checkbox" onclick="Toggles()"> Show Password
-
-                                    
-
-                                </div>
-
-                            </div>
-
-                        
-
-
-
-
-
-                                <div class="col-md-6 offset-md-4">
-
-                                    <input type="submit" class="btn btn-block btn-primary" name="submit" id="submit" value="Change Password">
-
-
-
-                
-
-                                </div>
-
-                        </div>
-
-                        </form>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        </div>
-
-        <script>
-
-                        function Toggle() { 
-
-            var temp = document.getElementById("password"); 
-
-            if (temp.type == "password") { 
-
-                temp.type = "text"; 
-
-            } 
-
-            else { 
-
-                temp.type = "password"; 
-
-            } 
-
-        } 
-
-
-
-
-
-                        </script>
-
-
-
-<script>
-
-             function Toggles() { 
-
-            var temp = document.getElementById("cpassword"); 
-
-            if (temp.type == "password") { 
-
-                temp.type = "text"; 
-
-            } 
-
-            else { 
-
-                temp.type = "password"; 
-
-            } 
-
-        } 
-
-
-
-
-
-                        </script>
-
-    </main>
-
-
-
-
-
-
-
-
-
-    </body>
-
-    </html>
+       <p class="error"><?php if(!empty($msg)){ echo $msg; } ?></p>
+     </form>
+     </div>
+   </div>  
+
+<?php } } ?>
+</body>
+</html>

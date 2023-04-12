@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recover Password</title>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="..\Css\style.css">
+</head>
 <?php
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -11,314 +22,89 @@ require './PHPMailer/src/SMTP.php';
 
    require_once "db.php";
 
-   
-
-    if (isset($_POST['forgot'])) {
-
-       
-
-        $email = mysqli_real_escape_string($conn, $_POST['email']);
-
-       
-
-        $result = mysqli_query($conn, "SELECT * FROM tblregistration WHERE email = '" . $email. "'");
-
-       $count= mysqli_num_rows($result);
-
-       $data= mysqli_fetch_array($result);
+if(isset($_REQUEST['pwdrst']))
+{
+  $email = $_REQUEST['email'];
+  $check_email = mysqli_query($conn,"select email from tblregistration where email='$email'");
+  $res = mysqli_num_rows($check_email);
 
 
-
-       $idData = $data['id'];
-
-       $emailData = $data['email'];
-
-       $nameData = $data['fullname'];
-
-
-
-       $url ='http://'.$_SERVER['SERVER_NAME'].'/butagcemetery/customerchangepassword.php?id='.$idData.'&email='.$emailData;
-
-
-
-      $output = 'Hi, Please click this link to reset your password.<br>'.$url;
+  if($res>0)
+  {
+    $message = '<div>
+     <p><b>Hello!</b></p>
+     <p>You are recieving this email because we recieved a password reset request for your account.</p>
+     <br>
+     <p><button class="btn btn-primary"><a href="http://localhost/main/html/customerchangepassword.php?secret='.base64_encode($email).'">Reset Password</a></button></p>
+     <br>
+     <p>If you did not request a password reset, no further action is required.</p>
+    </div>';
 
 
+$email = $email; 
 
-       if($email == $emailData) {
+$mail = new PHPMailer;
 
-
-
-        $mail = new PHPMailer;
-
-
-
-
-
-
-
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-        $mail->SMTPDebug = 2; //Alternative to above constant
         $mail->isSMTP();  
-
- $mail->Host = 'smtp.gmail.com';
-    $mail->SMTPAuth = true;
+$mail->SMTPAuth = true;                 
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;   
+$mail->Host = 'smtp.gmail.com';
+$mail->Port = 587; 
     $mail->Username = 'palacaysean@gmail.com';
     $mail->Password = 'aywhkbdwzpcnmrkx';
-    $mail->Port = 587;
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->isHTML(true);
-
-                                // TCP port to connect to
-
-
-
-$mail->setFrom('butagcemetery@gmail.com', 'butag Cemetery');
-
-$mail->addAddress($email, $nameData);     // Add a recipient
-
-
-
-$mail->isHTML(true);                                  // Set email format to HTML
-
-
-
-$mail->Subject = 'MSC Reset Password';
-
-$mail->Body    = $output;
-
-
-
-
-
-if(!$mail->send()) {
-
-    echo 'Message could not be sent.';
-
-    echo 'Mailer Error: ' . $mail->ErrorInfo;
-
-} else {
-
-    $msg= '<div class="alert alert-success">We have just sent you a link to reset your password.</div>';
-
-}
-
-
-
-       }else{
-
-           $errMsg='<div class="alert alert-danger">Your email address invalid!</div>';
-
-       }
-
-       
-
-    }
-
-?>
-
-<script>
-
-window.setTimeout(function() {
-
-    $(".alert").fadeTo(500, 0).slideUp(500, function(){
-
-        $(this).remove(); 
-
-    });
-
-}, 4000);
-
-
-
-</script>
-
-
-
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <?php include 'db.php'; 
-
-
-
-$query="SELECT * from tblcontent";
-
-$result= mysqli_query($conn,$query);
-
-while($row = mysqli_fetch_assoc($result))
-
+$mail->FromName = "Butag Cemtery";
+$mail->AddAddress($email);
+$mail->Subject = "Reset Password";
+$mail->isHTML( TRUE );
+$mail->Body =$message;
+if($mail->send())
 {
-
-
-
-    $title = $row['title'];
-
-     $navtitle = $row['navtitle'];
-
-   
-
-    }
+  $msg = "We have e-mailed your password reset link!";
+}
+}
+else
+{
+  $msg = "We can't find a user with that email address";
+}
+}
 
 ?>
+<body>
 
+<div class="container">
 
-
-    <!doctype html>
-
-    <html lang="en">
-
-    <head>
-
-      
-
-        <meta charset="utf-8">
-
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        <link rel="shortcut icon" href="icon.ico" />
-
-      
-
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-
-        <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-
-
-
-        <link rel="stylesheet" href="css/style.css">
-
-
-
-        <link rel="icon" href="Favicon.png">
-
-
-
-     
-
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
-
-
-        <title><?php echo $title; ?></title>
-
-    </head>
-
-    <body>
-
-
-
-    <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
-
-        <div class="container">
-
-            <a class="navbar-brand" href="login.php"><?php echo $navtitle; ?></a>
-
+    <div class="left-div">
+        <div class="left-image">
+            <img src="..\images\Forgot Pass.png" alt="">
         </div>
+        <div class="left-text">
+            <p>To reset your password, enter the registered e-mail adddress and we will send you password reset instructions on your e-mail!</p>
+        </div>
+    </div>
+        <!-- right div start  -->
 
-    </nav>
-
-   
-
-    <main class="login-form">
-
-        <div class="cotainer">
-
-            <div class="row justify-content-center">
-
-                <div class="col-md-8">
-
-                    <div class="card">
-
-                   
-
-                        <div class="card-header">Forgot Password</div>
-
-                        <div class="card-body">
-
-
-
-                        <p>Please enter your email address. We will send you a link to reset your password.</p>
-
-                        <?php if(isset($msg)){
-
-
-
-echo $msg;
-
-
-
-
-
-}
-
-
-
-?>
-
-<?php if(isset($errMsg)){
-
-
-
-echo $errMsg;
-
-}
-
-
-
-?>
-
-                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" autocomplete="off">
-
-                                <div class="form-group row">
-
-                                    <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
-
-                                    <div class="col-md-6">
-
-                                        <input type="email" id="email" class="form-control" name="email" required autofocus>
-
-                                        
-
-                                    </div>
-
-                                </div>
-
-
-
-                                <div class="col-md-6 offset-md-4">
-
-                                    <input type="submit" class="btn btn-block btn-primary" name="forgot" value="Send Reset Link">
-
-
-
-                
-
-                                </div>
-
-                        </div>
-
-                        </form>
-
-                    </div>
-
-                </div>
-
+        <div class="right-div">
+            <h4>Welcome Back</h4>
+            <form action="" class="right-form forgotPass-form">
+            <ul>
+                    <li><h3>Recover Your Password</h3></li>
+                    <li><input type="text" name="email" id="email" placeholder="Enter Email" required 
+       data-parsley-type="email" data-parsley-trigg
+       er="keyup" class="form-control"></li>
+                    <li><input type="submit" id="login" name="pwdrst" value="Get Link" class="btn btn-success"></li>
+                </ul>
+       
+       <p class="error"><?php if(!empty($msg)){ echo $msg; } ?></p>
+     </form>
+     <div class="footer">
+                <ul>
+                    <li><a href="index.html">Back</a></li>
+                </ul>
             </div>
+            <div class="vr-line"></div>
+     </div>
 
-        </div>
+     </div>
 
-        </div>
-
-
-
-    </main>
-
-
-
-    </body>
-
-    </html>
+</body>
+</html>
