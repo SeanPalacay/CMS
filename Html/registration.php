@@ -784,7 +784,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(45deg , #1d2951 , #1d2951);
+    background: linear-gradient(45deg ,#E8D8B6 , #d9caac);
 }
 
 .container{

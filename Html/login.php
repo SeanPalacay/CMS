@@ -139,8 +139,9 @@ $(document).ready(function() {
                 <img src="..\images\sd.png" alt="">
             </div>
             <div class="left-text">
-                <p>Where we provide a peaceful and respectful final resting place for your loved ones.</p>
-            </div>
+  <p>Where we provide a peaceful and respectful final resting place for your loved ones.</p>
+</div>
+
         </div>
 
         <!-- right div start  -->

@@ -78,7 +78,7 @@ else
             <img src="..\images\Forgot Pass.png" alt="">
         </div>
         <div class="left-text">
-            <p>To reset your password, enter the registered e-mail adddress and we will send you password reset instructions on your e-mail!</p>
+        <p style="font-size: 12px;">To reset your password, enter the registered e-mail adddress and we will send you password reset instructions on your e-mail!</p>
         </div>
     </div>
         <!-- right div start  -->
@@ -98,7 +98,7 @@ else
      </form>
      <div class="footer">
                 <ul>
-                    <li><a href="index.html">Back</a></li>
+                    <li><a href="login.php">Back</a></li>
                 </ul>
             </div>
             <div class="vr-line"></div>

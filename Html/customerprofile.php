@@ -232,11 +232,13 @@ while($row = mysqli_fetch_assoc($result))
 
                     <div class="left-text col-lg-6 col-md-6 col-sm-12 col-xs-12" data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
 
-                    <center>   <h4><?php echo $header1;?></h4></center>
+                    <center>   <h4 style ="color: #223892;"><?php echo $header1;?></h4></center>
 
-                     <br>
+                   
 
-                     <p style="text-align:justify"><?php echo $description1;?></p>
+<br>
+
+<p style=" color: #242F52; text-align:justify"><?php echo $description1;?></p>
 
                        
 
@@ -458,9 +460,9 @@ window.setTimeout(function() {
 
                 <main>
 
-                    <div class="container-fluid">
+                    <div style=" color: #242F52;" class="container-fluid">
 
-                        <h1 class="mt-4">Settings</h1>
+                        <h1 class="mt-4" style=" color: #223892;">Settings</h1>
 
                         <br>
 
@@ -468,7 +470,7 @@ window.setTimeout(function() {
 
                         <div class="card mb-4">
 
-                            <div class="card-header"><i class="fas fa-cog mr-1"></i>Settings </div>
+                            <div class="card-header"><i class="fas fa-cog mr-1"style=" color: #242F52;"></i>Settings </div>
 
                             <div class="card-body">
 
@@ -624,7 +626,9 @@ window.setTimeout(function() {
 
                              <div class="col-md-6 offset-md-4">
 
-                                 <input type="submit" name= "update" value="Update" class="btn btn-primary btn-block">
+                             <input type="submit" name="update" value="Update" class="btn btn-block" style="background: linear-gradient(45deg , #BCC5C7  , #c9d3d5); color: white;">
+
+
 
                              
                                  </div>

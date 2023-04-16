@@ -80,10 +80,10 @@ if($_GET['secret'])
 
     <div class="left-div">
         <div class="left-image">
-            <img src="..\images\Forgot Pass.png" alt="">
+            <img src="..\images\recover.png" alt="">
         </div>
         <div class="left-text">
-            <p>To reset your password, enter the registered e-mail adddress and we will send you password reset instructions on your e-mail!</p>
+        <p style="font-size: 12px;">To reset your password, enter the registered e-mail adddress and we will send you password reset instructions on your e-mail!</p>
         </div>
     </div>
   

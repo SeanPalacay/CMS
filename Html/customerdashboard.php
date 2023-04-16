@@ -228,13 +228,13 @@ while($row = mysqli_fetch_assoc($result))
 
                     <div class="left-text col-lg-6 col-md-6 col-sm-12 col-xs-12" data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
 
-                    <center>   <h4 style ="color: black;"><?php echo $header1;?></h4></center>
+                    <center>   <h4 style ="color: #223892;"><?php echo $header1;?></h4></center>
 
                    
 
                      <br>
 
-                     <p style="text-align:justify"><?php echo $description1;?></p>
+                     <p style=" color: #242F52; text-align:justify"><?php echo $description1;?></p>
 
                        
 
@@ -328,7 +328,7 @@ while($data = mysqli_fetch_assoc($res))
 
 
 
-   <h1 class="mt-4" style ="color: black;">SERVICES</h1>
+    <h1 class="mt-4" style=" color: #223892;">SERVICES</h1>
 
    
 
@@ -354,9 +354,9 @@ while($data = mysqli_fetch_assoc($res))
 
         <div class="col mr-2">
 
-          <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">Book An Appointment</div>
+        <div class="text-lg font-weight-bold text-uppercase mb-1" style="color: #416E27;">Book An Appointment</div>
 
-          <a href="bookappointment.php#appointment" class="text-xs font-weight-bold text-dark text-uppercase mb-1">Proceed</a> <i class="fas fa-angle-double-right"></i>
+          <a href="bookappointment.php#appointment" class="text-xs font-weight-bold text-uppercase mb-1" style="color: #242F52;">Proceed</a> <i class="fas fa-angle-double-right"style="color: #F54844;"></i>
 
         </div>
 
@@ -388,9 +388,10 @@ while($data = mysqli_fetch_assoc($res))
 
         <div class="col mr-2">
 
-        <div class="text-lg font-weight-bold text-success text-uppercase mb-1">Lot</div>
+        <div class="text-lg font-weight-bold text-uppercase mb-1" style="color: #416E27;">Lot</div>
 
-          <a href="selectlot.php#select" class="text-xs font-weight-bold text-dark text-uppercase mb-1">Proceed</a> <i class="fas fa-angle-double-right"></i>
+
+          <a href="selectlot.php#select" class="text-xs font-weight-bold text-uppercase mb-1" style="color: #242F52;">Proceed</a> <i class="fas fa-angle-double-right"style="color: #F54844;"></i>
 
         </div>
 
@@ -408,37 +409,6 @@ while($data = mysqli_fetch_assoc($res))
 
 </div>
 
-
-
-<div class="col-xl-4 col-md-6 mb-4">
-
-  <div class="card border-left-warning shadow h-100 py-2">
-
-    <div class="card-body">
-
-      <div class="row no-gutters align-items-center">
-
-        <div class="col mr-2">
-
-          <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">Balance</div>
-
-          <a href="customerotherpayment.php#balance" class="text-xs font-weight-bold text-dark text-uppercase mb-1">Proceed</a> <i class="fas fa-angle-double-right"></i>
-
-        </div>
-
-        <div class="col-auto">
-
-          <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
 
 </div>
 

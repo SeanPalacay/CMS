@@ -6,15 +6,15 @@
     transition: 1s;
 }
 :root{
-    --primary-color : linear-gradient(45deg , #989b9c  , #bfc1c2);
-    --text-color : #1034a6;
+    --primary-color : linear-gradient(45deg , #BCC5C7  , #c9d3d5);
+    --text-color : #242F52;
 }
 body{
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(45deg , #1d2951 , #1d2951);
+    background: linear-gradient(45deg ,#E8D8B6 , #d9caac);
 }
 
 .container{
@@ -229,7 +229,7 @@ body{
 .loader_bg {
     position: fixed;
     z-index: 999999;
-    background: #1d2951;
+    background: #E8D8B6;
     top: 0;
     right: 0;
     bottom: 0;
@@ -249,7 +249,7 @@ body{
 }
 .loader:before, .loader:after{
     content: '';
-    border: 1em solid #ff5733;
+    border: 1em solid #223892;
     border-radius: 50%;
     width: inherit;
     height: inherit;
